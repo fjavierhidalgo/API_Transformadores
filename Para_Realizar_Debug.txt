@@ -1,0 +1,6 @@
+- Ejecutamos NetCoreAPIYFrontBlazor.Client
+- Pulsamos Stop porque no se está ejecutando el API
+- Ejecutamos NetCoreAPIYFrontBlazor.Server
+- Nos aparece la página de Swagger
+- Copiamos la direccion: https://localhost:7162
+- Habrimos nueva pestaña y pegamos 

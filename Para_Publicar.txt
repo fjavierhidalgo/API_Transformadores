@@ -1,0 +1,20 @@
+- en el proyecto cliente NetCoreAPIFrontBlazor.Cliente dentro de wwwroot está appsettings.json
+  Aquí guardamos las variables para indicar las url al API. Por ejemplo, tenemos que indicar la URL con  "http://www.mycruds.somee.com/Hechos/Lista".
+- La base de datos SQLite (dbSqliteServer.db) es un fichero externo como pueda ser una imagen, en propiedades hay que indicar:
+	Acción de compilación: Recurso incrustrado
+	Copiar en el directorio de salida: Copiar siempre
+- Ejecutamos NetCoreAPIYFrontBlazor.Client  (Para que se compilen los cambios)
+- Pulsamos Stop porque no se está ejecutando el API
+- En proyecto NetCoreAPIYFrontBlazor.Server pulsamos botón derecho y elgimos publicar
+- Si no se ha guardado elegimos Servidor FTP
+
+Datos:
+Servidor - ftp://192.52.242.121/www.MyCruds.somee.com
+Sitio: http://www.MyCruds.somee.com
+Usuario: fjavierhidalgo
+C: 11IsaJime5
+
+Marcar la propiedad "Borrar lo publicado anteriormente" 
+
+- Guardamos
+- Pulsamos Publicar 
