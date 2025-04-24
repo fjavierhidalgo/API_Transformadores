@@ -21,6 +21,7 @@ public class ServerContext : DbContext, IServerContext
     public DbSet<Hecho> Hechos { get; set; }
 
     public DbSet<Auditoria> Auditoria { get; set; }
+    public DbSet<Transformador> Transformadores { get; set; }
 
 
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
