@@ -1,0 +1,81 @@
+﻿@page "/transformador"
+@using NetCoreAPIYFrontBlazor.Client.Services;
+@using NetCoreAPIYFrontBlazor.Shared;
+@using Microsoft.AspNetCore.Components.QuickGrid;
+@inject HttpClient Http
+@inject ITransformadoresService _transformadoresService
+@inject IJSRuntime JS
+
+
+<PageTitle>Transformador</PageTitle>
+
+<h1>Transformador</h1>
+
+<p>Lectura de datos</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <p>
+        @mensaje
+    </p>
+    <EditForm Model="transformador" OnValidSubmit="GuardarTransformador">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="mb-3">
+            <label for="nombre" class="form-label">Nombre</label>
+            <InputText id="nombre" class="form-control" @bind-Value="transformador.nombre" />
+            <ValidationMessage For="@(() => transformador.nombre)" />
+        </div>
+
+        <div class="mb-3">
+            <label for="referencia" class="form-label">Referencia</label>
+            <InputText id="referencia" class="form-control" @bind-Value="transformador.referencia" />
+            <ValidationMessage For="@(() => transformador.referencia)" />
+        </div>
+
+        <div class="mb-3">
+            <label for="detalle" class="form-label">Detalle</label>
+            <InputTextArea id="detalle" class="form-control" @bind-Value="transformador.detalle" />
+            <ValidationMessage For="@(() => transformador.detalle)" />
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+    </EditForm>
+
+
+  
+}
+
+@code {
+    private TransformadorDto transformador = new();
+
+    private string? mensaje = "";
+
+    private void GuardarTransformador()
+    {
+        // Aquí puedes guardar o procesar los datos del transformador
+        Console.WriteLine($"Guardado: {transformador.nombre}, {transformador.referencia}, {transformador.detalle}");
+    }
+
+    // public class TransformadorDto
+    // {
+    //     public int id { get; set; }
+
+    //     [Required(ErrorMessage = "El nombre es obligatorio.")]
+    //     public string? nombre { get; set; }
+
+    //     [Required(ErrorMessage = "La referencia es obligatoria.")]
+    //     public string? referencia { get; set; }
+
+    //     public string? detalle { get; set; }
+    // }
+
+
+
+}
+
