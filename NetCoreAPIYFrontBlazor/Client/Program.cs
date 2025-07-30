@@ -11,6 +11,7 @@ builder.RootComponents.Add<HeadOutlet>("head::after");
 
 builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.HostEnvironment.BaseAddress) });
 builder.Services.AddScoped<IHechosService, HechosService>();
+builder.Services.AddScoped<ITransformadoresService, TransformadoresService>();
 
 await builder.Build().RunAsync();
 

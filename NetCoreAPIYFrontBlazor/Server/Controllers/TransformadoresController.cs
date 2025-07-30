@@ -13,11 +13,11 @@ namespace STS.Diversos.API.Controllers
     public class TransformadoresController : BaseController
     {
             
-        [HttpGet("{transformadorid}")]
+        [HttpGet("{Referencia}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<DatosTransformadoresDto>> GetHechoId(int transformadorid)
+        public async Task<ActionResult<TransformadorDto>> GetTransformadorRef(string Referencia)
         {
-            DatosTransformadoresDto transformadoresDto = await Mediator.Send(new GetTransformadorByIdQuery(transformadorid));
+            TransformadorDto transformadoresDto = await Mediator.Send(new GetTransformadorByReferenciaQuery(Referencia));
             return Ok(transformadoresDto);
         }     
 

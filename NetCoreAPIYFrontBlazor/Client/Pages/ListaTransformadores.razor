@@ -1,0 +1,97 @@
+﻿@page "/listatransformadores"
+@using NetCoreAPIYFrontBlazor.Client.Services;
+@using NetCoreAPIYFrontBlazor.Shared;
+@using Microsoft.AspNetCore.Components.QuickGrid;
+@inject HttpClient Http
+@inject ITransformadoresService _transformadoresService
+@inject IJSRuntime JS
+@inject NavigationManager Navigation
+
+
+
+<PageTitle>Relacion de Transformadores</PageTitle>
+
+<h1>Relacion de Transformadores</h1>
+
+<p>Lectura de datos</p>
+
+@if (lectura == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <p>
+        @mensaje
+    </p>
+    <button class="btn btn-primary" @onclick="@(()=>Alta())">Nuevo</button>
+    <QuickGrid Items="@transformadores" @ref="grid" Pagination="@pagination">
+
+        <PropertyColumn Property="@(p => p.referencia)" Sortable="true" Title="Referencia" Align="Align.Center">
+            <ColumnOptions>
+                <label>
+                    <input type="text" @bind="prefijo" />Referencia comienza por:
+                </label>
+                <button class="btn btn-primary" @onclick="@(()=>Filtrar())">Filtrar</button>
+            </ColumnOptions>
+        </PropertyColumn>
+        <PropertyColumn Property="@(p => p.nombre.ToUpper())" Sortable="true" Title="Transformador" />
+        <PropertyColumn Property="@(p => p.detalle)" Sortable="true" Title="Detalle" />
+        <TemplateColumn Title="Acciones">
+            <button class="btn btn-primary" @onclick="@(()=>Editar(context))">Editar</button>
+        </TemplateColumn>
+
+    </QuickGrid>
+    <Paginator State="@pagination" />
+
+
+  
+}
+
+@code {
+    private TransformadorDto[]? lectura;
+    private IQueryable<TransformadorDto> transformadores;
+    private IQueryable<TransformadorDto> maestroTransformadores;
+    QuickGrid<TransformadorDto>? grid;
+    private string? mensaje ="";
+    string prefijo = "";
+    PaginationState pagination = new PaginationState { ItemsPerPage = 10 };
+
+    protected override async Task OnInitializedAsync()
+    {
+        lectura = await _transformadoresService.GetDatosTransformadoresLista();
+        transformadores = lectura.AsQueryable();
+        maestroTransformadores = transformadores; 
+
+        //forecasts = await Http.GetFromJsonAsync<HechoDto[]>("https://localhost:7162/Hechos/Lista");
+        //retorno = await Http.GetStringAsync("https://localhost:7162/Hechos/Lista");
+
+    }
+
+    public void Alta()
+    {
+        Navigation.NavigateTo($"/transformador/0");
+    }
+   
+
+    public void Editar(TransformadorDto transformador)
+    {
+        Navigation.NavigateTo($"/transformador/{transformador.referencia}");
+    }
+
+
+    public async Task Filtrar()
+    {
+        if (prefijo.Length > 0)
+        {
+            transformadores = maestroTransformadores.Where(p => p.referencia.Substring(0,prefijo.Length)  == prefijo);
+        }
+        else
+        {
+            transformadores = maestroTransformadores;
+        }
+        await grid!.RefreshDataAsync();
+    }
+
+}
+

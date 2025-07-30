@@ -20,7 +20,7 @@ namespace NetCoreAPIYFrontBlazor.Server.Persistence.Configuration
 
             builder.Property(n => n.Nombre).HasMaxLength(NombreLength).IsFixedLength().HasColumnType($"varchar({NombreLength})");
             builder.Property(n => n.Referencia).HasMaxLength(ReferenciaLength).IsFixedLength().HasColumnType($"varchar({ReferenciaLength})");
-            builder.Property(n => n.Detalle).HasColumnType($"varchar(max)");
+            builder.Property(n => n.Detalle).HasColumnType($"varchar(1000)");
 
 
         }

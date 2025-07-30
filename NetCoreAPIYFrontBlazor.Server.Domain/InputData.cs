@@ -13,16 +13,18 @@ namespace NetCoreAPIYFrontBlazor.Server.Domain
     {
         public int Id { get; set; }
         public int? TransformadorId { get; set; }
+        public string? Project { get; set; }
+        public string? Customer { get; set; }
         public int ? Power { get; set; }
         public int ?Frecc { get; set; }
-        public int? Cooling { get; set; }
-        public int? HVTapNegNumero { get; set; }
-        public int? HVTapNegRegulacion { get; set; }
-        public int? HVTapNegMin { get; set; }
-        public int? HVTapPosNumero { get; set; }
-        public int? HVTapPosRegulacion { get; set; }
-        public int? HVTapPosMin { get; set; }
-        public int? OilKind { get; set; }
+        public string? Cooling { get; set; }
+        public decimal? HVTapNegNumero { get; set; }
+        public decimal? HVTapNegRegulacion { get; set; }
+        public decimal? HVTapNegMin { get; set; }
+        public decimal? HVTapPosNumero { get; set; }
+        public decimal? HVTapPosRegulacion { get; set; }
+        public decimal? HVTapPosMin { get; set; }
+        public string? OilKind { get; set; }
 
 
         public Transformador? Transformador { get; set; }

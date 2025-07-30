@@ -5,12 +5,15 @@ using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using NetCoreAPIYFrontBlazor.Shared;
+using System.Text;
 
 namespace NetCoreAPIYFrontBlazor.Client.Services
 {
     public interface ITransformadoresService
     {
         Task<TransformadorDto[]> GetDatosTransformadoresLista();
+        Task<TransformadorDto?> GetTransformadorPorReferencia(string referencia);
+        Task ActualizarTransformador(TransformadorDto dto);
     }
 
 
@@ -39,8 +42,8 @@ namespace NetCoreAPIYFrontBlazor.Client.Services
                 client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 
                 // url = "https://localhost:7162/Transformadores/Lista"; 
-                //API:Hechos es un valor definido en el appsettings.json. En el cliente de un proyecto Blazor WebAssembly este fichero .json tiene que estar dentro de  wwwroot 
-                string url = _configuration["API:Transformadores"];
+                //API:url es un valor definido en el appsettings.json. En el cliente de un proyecto Blazor WebAssembly este fichero .json tiene que estar dentro de  wwwroot 
+                string url = _configuration["API:GetTransformadores"];
                
                 
                 HttpResponseMessage response = await client.GetAsync(url);
@@ -58,9 +61,69 @@ namespace NetCoreAPIYFrontBlazor.Client.Services
             {
             }
 
-            return datosTransformadoresDto?.Transformadores?.ToArray();
+            return datosTransformadoresDto?.transformadores?.ToArray();
 
         }
+
+        public async Task<TransformadorDto?> GetTransformadorPorReferencia(string referencia)
+        {
+            TransformadorDto datosTransformadorDto = new();
+
+            try
+            {
+
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                // url = "https://localhost:7162/Transformadores/"; 
+                //API:url es un valor definido en el appsettings.json. En el cliente de un proyecto Blazor WebAssembly este fichero .json tiene que estar dentro de  wwwroot 
+                string url = _configuration["API:GetTransformador"] + referencia;
+
+
+                HttpResponseMessage response = await client.GetAsync(url);
+                if (response.IsSuccessStatusCode)
+                {
+                    response.EnsureSuccessStatusCode();
+                    var resp = await response.Content.ReadAsStringAsync();
+
+                    datosTransformadorDto = JsonSerializer.Deserialize<TransformadorDto>(resp);
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return datosTransformadorDto;
+        }
+
+        public async Task ActualizarTransformador(TransformadorDto dto)
+        {
+            //Realizamos una llamada a la API para actualizar el transformador
+
+            try
+            {
+                HttpClient client = new HttpClient();
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                // url = "https://localhost:7162/Transformadores/"; 
+                //API:url es un valor definido en el appsettings.json. En el cliente de un proyecto Blazor WebAssembly este fichero .json tiene que estar dentro de  wwwroot 
+                string url = _configuration["API:PostTransformador"];
+                // Serializar el objeto a JSON
+                string jsonContent = JsonSerializer.Serialize(dto);
+                var httpContent = new StringContent(jsonContent, Encoding.UTF8, "application/json");
+                // Enviar POST
+                HttpResponseMessage response = await client.PostAsync(url, httpContent);
+
+                response.EnsureSuccessStatusCode();
+            }
+            catch (Exception ex)
+            {
+            }
+
+
+        }
+
 
 
 

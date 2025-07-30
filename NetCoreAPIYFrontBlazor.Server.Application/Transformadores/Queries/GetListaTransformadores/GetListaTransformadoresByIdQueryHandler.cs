@@ -42,7 +42,7 @@ namespace STS.SiniestrosHogar.Application.Transformadores.Queries
             {
               
                 TransformadorDto transformadorDto = new() { id = datoLeido.Id, nombre = datoLeido.Nombre ?? "", referencia=datoLeido.Referencia, detalle=datoLeido.Detalle };
-                datosTransformadoresDto.Transformadores.Add(transformadorDto);
+                datosTransformadoresDto.transformadores.Add(transformadorDto);
               
             }
                         

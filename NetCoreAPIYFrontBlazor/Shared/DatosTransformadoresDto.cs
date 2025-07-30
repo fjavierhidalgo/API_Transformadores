@@ -13,18 +13,18 @@ namespace NetCoreAPIYFrontBlazor.Shared
     {
         public DatosTransformadoresDto()
         {
-            Transformadores = new List<TransformadorDto>();
+            transformadores = new List<TransformadorDto>();
         }
 
-        public List<TransformadorDto> Transformadores { get; set; }
+        public List<TransformadorDto> transformadores { get; set; }
     }
 
     public class TransformadorDto
     {
-        public int id { get; set; }
-        public string? nombre { get; set; }
-        public string? referencia { get; set; }
-        public string? detalle { get; set; }
+        public int id { get; set; } = 0;
+        public string? nombre { get; set; } = "";
+        public string? referencia { get; set; } = "";
+        public string? detalle { get; set; } = "";
 
 
     }
