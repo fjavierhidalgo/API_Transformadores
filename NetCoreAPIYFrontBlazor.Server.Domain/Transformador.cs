@@ -16,6 +16,8 @@ namespace NetCoreAPIYFrontBlazor.Server.Domain
         public string ?Referencia { get; set; }
         public string? Detalle { get; set; }
 
+        public InputData? InputData { get; set; }
+
 
     }
 

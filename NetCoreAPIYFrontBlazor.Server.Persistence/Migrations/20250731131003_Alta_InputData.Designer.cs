@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetCoreAPIYFrontBlazor.Server.Persistence;
 
@@ -10,9 +11,11 @@ using NetCoreAPIYFrontBlazor.Server.Persistence;
 namespace NetCoreAPIYFrontBlazor.Server.Persistence.Migrations
 {
     [DbContext(typeof(ServerContext))]
-    partial class ServerContextModelSnapshot : ModelSnapshot
+    [Migration("20250731131003_Alta_InputData")]
+    partial class Alta_InputData
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
@@ -77,7 +80,7 @@ namespace NetCoreAPIYFrontBlazor.Server.Persistence.Migrations
                     b.Property<decimal?>("HVTapNegRegulacion")
                         .HasColumnType("TEXT");
 
-                    b.Property<decimal?>("HVTapPosMax")
+                    b.Property<decimal?>("HVTapPosMin")
                         .HasColumnType("TEXT");
 
                     b.Property<decimal?>("HVTapPosNumero")

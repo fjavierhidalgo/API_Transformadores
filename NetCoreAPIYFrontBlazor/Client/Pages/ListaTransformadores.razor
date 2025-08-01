@@ -38,7 +38,8 @@ else
         <PropertyColumn Property="@(p => p.nombre.ToUpper())" Sortable="true" Title="Transformador" />
         <PropertyColumn Property="@(p => p.detalle)" Sortable="true" Title="Detalle" />
         <TemplateColumn Title="Acciones">
-            <button class="btn btn-primary" @onclick="@(()=>Editar(context))">Editar</button>
+            <button class="btn btn-primary" @onclick="@(() => Editar(context))">Editar</button>
+            <button class="btn btn-warning me-2" @onclick="@(() => EditarInputData(context))">InputData</button>            
         </TemplateColumn>
 
     </QuickGrid>
@@ -77,6 +78,11 @@ else
     public void Editar(TransformadorDto transformador)
     {
         Navigation.NavigateTo($"/transformador/{transformador.referencia}");
+    }
+
+    public void EditarInputData(TransformadorDto transformador)
+    {
+        Navigation.NavigateTo($"/inputdata/{transformador.referencia}");
     }
 
 

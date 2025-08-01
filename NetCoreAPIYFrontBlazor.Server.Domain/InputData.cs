@@ -23,7 +23,7 @@ namespace NetCoreAPIYFrontBlazor.Server.Domain
         public decimal? HVTapNegMin { get; set; }
         public decimal? HVTapPosNumero { get; set; }
         public decimal? HVTapPosRegulacion { get; set; }
-        public decimal? HVTapPosMin { get; set; }
+        public decimal? HVTapPosMax { get; set; }
         public string? OilKind { get; set; }
 
 

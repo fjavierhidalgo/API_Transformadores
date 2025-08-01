@@ -18,10 +18,11 @@ public class ServerContext : DbContext, IServerContext
 
     private string database = "dbSqliteServer.db";
 
-    public DbSet<Hecho> Hechos { get; set; }
+   
 
     public DbSet<Auditoria> Auditoria { get; set; }
     public DbSet<Transformador> Transformadores { get; set; }
+    public DbSet<InputData> InputsData { get; set; }
 
 
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -41,11 +42,11 @@ public class ServerContext : DbContext, IServerContext
     {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ServerContext).Assembly);
 
-        modelBuilder.Entity<Hecho>().ToTable("Hechos");
-        modelBuilder.Entity<Hecho>(entidad =>
-        {
-            entidad.HasKey(k => k.Id);
-        });
+        //modelBuilder.Entity<Hecho>().ToTable("Hechos");
+        //modelBuilder.Entity<Hecho>(entidad =>
+        //{
+        //    entidad.HasKey(k => k.Id);
+        //});
        
         base.OnModelCreating(modelBuilder);
     }

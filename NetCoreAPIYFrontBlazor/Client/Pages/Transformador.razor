@@ -18,20 +18,21 @@ else
         <DataAnnotationsValidator />
         <ValidationSummary />
 
-        <div class="mb-3">
-            <label for="referencia" class="form-label">Referencia</label>
-            <InputText id="referencia" class="form-control" @bind-Value="transformador.referencia" Disabled="@(transformador.referencia != "0" && !string.IsNullOrEmpty(transformador.referencia))" />
-        </div>
-
-        <div class="mb-3">
-            <label for="nombre" class="form-label">Nombre</label>
-            <InputText id="nombre" class="form-control" @bind-Value="transformador.nombre" />
-            <ValidationMessage For="@(() => transformador.nombre)" />
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="referencia" class="form-label">Referencia</label>
+                <InputText id="referencia" class="form-control" @bind-Value="transformador.referencia" Disabled="@(transformador.referencia != "0" && !string.IsNullOrEmpty(transformador.referencia))" />
+            </div>
+            <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <InputText id="nombre" class="form-control" @bind-Value="transformador.nombre" />
+                <ValidationMessage For="@(() => transformador.nombre)" />
+            </div>
         </div>
 
         <div class="mb-3">
             <label for="detalle" class="form-label">Detalle</label>
-            <InputTextArea id="detalle" class="form-control" @bind-Value="transformador.detalle" />
+            <InputTextArea id="detalle" class="form-control" @bind-Value="transformador.detalle" rows="5" />
         </div>
 
         <button type="submit" class="btn btn-success">Guardar</button>

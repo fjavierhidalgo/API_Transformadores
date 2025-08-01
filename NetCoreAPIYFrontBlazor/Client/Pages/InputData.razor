@@ -1,0 +1,143 @@
+﻿@page "/inputdata/{referencia}"
+@using NetCoreAPIYFrontBlazor.Client.Services
+@using NetCoreAPIYFrontBlazor.Shared
+@inject IInputsDataService _inputsDataService
+@inject NavigationManager Navigation
+
+<PageTitle>Input Data</PageTitle>
+
+<h3>Input Data</h3>
+
+@if (inputData == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <EditForm Model="inputData" OnValidSubmit="Guardar">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label for="id" class="form-label">Id</label>
+                <InputNumber id="id" class="form-control" @bind-Value="inputData.id" Disabled="true" />
+            </div>
+            <div class="col-md-3">
+                <label for="transformadorId" class="form-label">Transformador Id</label>
+                <InputNumber id="transformadorId" class="form-control" @bind-Value="inputData.transformadorId" Disabled="true" />
+            </div>
+            <div class="col-md-3">
+                <label for="project" class="form-label">Proyecto</label>
+                <InputText id="project" class="form-control" @bind-Value="inputData.project" />
+            </div>
+            <div class="col-md-3">
+                <label for="customer" class="form-label">Cliente</label>
+                <InputText id="customer" class="form-control" @bind-Value="inputData.customer" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="power" class="form-label">POWER</label>
+                <InputNumber id="power" class="form-control" @bind-Value="inputData.power" />
+            </div>
+            <div class="col-md-4">
+                <label for="frecc" class="form-label">Frecc.</label>
+                <InputNumber id="frecc" class="form-control" @bind-Value="inputData.frecc" />
+            </div>                
+            <div class="col-md-4">
+                <label for="cooling" class="form-label">Cooling</label>
+                <InputText id="cooling" class="form-control" @bind-Value="inputData.cooling" />
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <label for="hvtap" class="form-label">HV Tap</label>            
+        </div>
+        <div class="row mb-3">
+            <div class="col-md-4">
+                <label for="hVTapNegNumero" class="form-label">-</label>
+                <InputNumber id="hVTapNegNumero" class="form-control" @bind-Value="inputData.hVTapNegNumero" />
+                <InputNumber id="hVTapNegRegulacion" class="form-control" @bind-Value="inputData.hVTapNegRegulacion" />
+            </div>
+            <div class="col-md-4">
+                <label for="hVTapPosNumero" class="form-label">+</label>
+                <InputNumber id="hVTapPosNumero" class="form-control" @bind-Value="inputData.hVTapPosNumero" />
+                <InputNumber id="hVTapPosRegulacion" class="form-control" @bind-Value="inputData.hVTapPosRegulacion" />
+            </div>
+        </div>
+        <div class="row mb-3">           
+            <div class="col-md-4">
+                <label for="hVTapNegMin" class="form-label">Mín</label>
+                <InputNumber id="hVTapNegMin" class="form-control" @bind-Value="inputData.hVTapNegMin" />
+            </div>
+            <div class="col-md-4">
+                <label for="hVTapPosMax" class="form-label">Max</label>
+                <InputNumber id="hVTapPosMax" class="form-control" @bind-Value="inputData.hVTapPosMax" />
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <label for="oilKind" class="form-label">Oil Kind</label>
+            <InputText id="oilKind" class="form-control" @bind-Value="inputData.oilKind" />
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-secondary" @onclick="Volver">Volver</button>
+    </EditForm>
+
+}
+
+@code {
+    [Parameter]
+    public string? referencia { get; set; }
+
+    private InputDataDto? inputData;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(referencia) && referencia != "0")
+        {
+            inputData = await _inputsDataService.GetInPutPorReferencia(referencia);
+            Calculos();
+        }
+        else
+        {
+            inputData = new();
+        }
+    }
+    protected override async Task OnParametersSetAsync()
+    {
+        if (inputData != null)
+        {
+            Calculos();
+        }
+    }
+
+    private async Task Guardar()
+    {
+        if (inputData != null)
+        {
+            await _inputsDataService.ActualizarInput(inputData);
+            Navigation.NavigateTo("/listatransformadores");
+        }
+    }
+
+    private void Volver()
+    {
+        Navigation.NavigateTo("/listatransformadores");
+    }
+
+    private void Calculos()
+    {
+        inputData.hVTapNegMin = inputData.hVTapNegNumero * inputData.hVTapNegRegulacion;
+        inputData.hVTapPosMax = inputData.hVTapPosNumero * inputData.hVTapPosRegulacion;
+    }
+
+
+}
+
+
