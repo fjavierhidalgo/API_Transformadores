@@ -59,13 +59,30 @@ else
         <div class="row mb-3">
             <div class="col-md-4">
                 <label for="hVTapNegNumero" class="form-label">-</label>
-                <InputNumber id="hVTapNegNumero" class="form-control" @bind-Value="inputData.hVTapNegNumero" />
-                <InputNumber id="hVTapNegRegulacion" class="form-control" @bind-Value="inputData.hVTapNegRegulacion" />
+                <InputNumber TValue="decimal?"
+                             Value="inputData.hVTapNegNumero"
+                             ValueChanged="@(v => OnChange(v, val => inputData.hVTapNegNumero = val))"
+                             ValueExpression="() => inputData.hVTapNegNumero"
+                             class="form-control" />               
+                <InputNumber TValue="decimal?"
+                             Value="inputData.hVTapNegRegulacion"
+                             ValueChanged="@(v => OnChange(v, val => inputData.hVTapNegRegulacion = val))"
+                             ValueExpression="() => inputData.hVTapNegRegulacion"
+                             class="form-control" />
             </div>
             <div class="col-md-4">
-                <label for="hVTapPosNumero" class="form-label">+</label>
-                <InputNumber id="hVTapPosNumero" class="form-control" @bind-Value="inputData.hVTapPosNumero" />
-                <InputNumber id="hVTapPosRegulacion" class="form-control" @bind-Value="inputData.hVTapPosRegulacion" />
+                <label for="hVTapPosNumero" class="form-label">+</label>               
+                <InputNumber TValue="decimal?"
+                             Value="inputData.hVTapPosNumero"
+                             ValueChanged="@(v => OnChange(v, val => inputData.hVTapPosNumero = val))"
+                             ValueExpression="() => inputData.hVTapPosNumero"
+                             class="form-control" />                
+                <InputNumber TValue="decimal?"
+                             Value="inputData.hVTapPosRegulacion"
+                             ValueChanged="@(v => OnChange(v, val => inputData.hVTapPosRegulacion = val))"
+                             ValueExpression="() => inputData.hVTapPosRegulacion"
+                             class="form-control" />
+                
             </div>
         </div>
         <div class="row mb-3">           
@@ -115,6 +132,12 @@ else
         {
             Calculos();
         }
+    }
+
+    private void OnChange<T>(T value, Action<T> setter)
+    {
+        setter(value);
+        Calculos();
     }
 
     private async Task Guardar()
