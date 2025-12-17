@@ -35,7 +35,8 @@
   <ItemGroup>
     <ProjectReference Include="..\..\NetCoreAPIYFrontBlazor.Server.Domain\NetCoreAPIYFrontBlazor.Server.Domain.csproj" />
     <ProjectReference Include="..\..\NetCoreAPIYFrontBlazor.Server.Persistence\NetCoreAPIYFrontBlazor.Server.Persistence.csproj" />
-    <ProjectReference Include="..\Client\NetCoreAPIYFrontBlazor.Client.csproj" />
+	  <!-- ELIMINA ESTA LÍNEA -->
+	  <!-- <ProjectReference Include="..\Client\NetCoreAPIYFrontBlazor.Client.csproj" /> -->
     <ProjectReference Include="..\Shared\NetCoreAPIYFrontBlazor.Shared.csproj" />
     <ProjectReference Include="..\..\NetCoreAPIYFrontBlazor.Server.Application\NetCoreAPIYFrontBlazor.Server.Application.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>

@@ -1,3 +1,5 @@
+PUBLICAR CON EL FRONTEND DE BLAZOR Y DESDE VISUALSTUDIO EN MODO FTP
+
 - en el proyecto cliente NetCoreAPIFrontBlazor.Cliente dentro de wwwroot está appsettings.json
   Aquí guardamos las variables para indicar las url al API. Por ejemplo, tenemos que indicar la URL con  "http://www.mycruds.somee.com/Hechos/Lista".
 - La base de datos SQLite (dbSqliteServer.db) es un fichero externo como pueda ser una imagen, en propiedades hay que indicar:
@@ -18,3 +20,25 @@ Marcar la propiedad "Borrar lo publicado anteriormente"
 
 - Guardamos
 - Pulsamos Publicar 
+
+
+
+PUBLICAR SOLO EL BACKEND, DESDE VISUAL STUDIO EN MODO CARPETA
+
+- Lo primero es editar el proyecto NetCoreAPIYFrontBlazor.Server. Tenemos que comentar lo siguiente:
+	  <!-- <ProjectReference Include="..\Client\NetCoreAPIYFrontBlazor.Client.csproj" /> -->
+- Botón derecho en NetCoreAPIYFrontBlazor.Server y seleccionamos "Publicar" (Modo Carpeta de Publicación)
+- Entramos en la siguiente dirección: 
+  https://somee.com/doka/DOU/Websites/WebsiteFileManager?mpid=5003018&h1h2h3=24394616f7328d75293c6aebd0ec09d7
+  Us: FJavierHidalgo	Con: 11IsaJime6
+	Carpeta: www.Transformadores.somee.com
+
+- Pulsamos Upload de la carpeta www.Transformadores.somee.com
+- Seleccionamos todos los archivos y hacemos un pug and play en el cuadro que se ha abierto en la página
+
+
+
+
+PARA CONSULTAR BBDD SQLITE
+
+https://sqliteonline.com/
