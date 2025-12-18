@@ -37,6 +37,49 @@ PUBLICAR SOLO EL BACKEND, DESDE VISUAL STUDIO EN MODO CARPETA
 - Seleccionamos todos los archivos y hacemos un pug and play en el cuadro que se ha abierto en la página
 
 
+ANTES DE TODO ESTO NOS DIO UN PROBLEMA QUE SE RESOLVIO DE LA SIGUIENTE MANERA EN VISUAL STUDIO CODE:
+El error 401 (Unauthorized) indica que no tienes autenticación configurada para acceder al feed privado de Azure DevOps NuGet. Vamos a revisar la configuración y solucionar el problema.
+
+Se buscaron archivos que coinciden con **/nuget.config, no hay coincidencias
+
+Se ha buscado texto pkgs.dev.azure.com, sin resultados
+
+No hay un archivo nuget.config local en el proyecto. El feed de Azure DevOps probablemente está configurado a nivel global o en los archivos .csproj. Vamos a verificar:
+
+
+dotnet nuget list source
+ Enable shell integration to improve command detection
+
+Tienes configurado el feed SolissNet_Feed de Azure DevOps pero no tienes credenciales válidas. Hay varias opciones para solucionar esto:
+
+Opción 1: Autenticarse con Azure Artifacts Credential Provider (Recomendado)
+
+iex "& { $(irm https://aka.ms/install-artifacts-credprovider.ps1) }"
+ Enable shell integration to improve command detection
+
+El proveedor de credenciales se instaló correctamente. Ahora necesitas autenticarte. Ejecuta el siguiente comando que abrirá una ventana de inicio de sesión interactivo:
+
+
+dotnet restore --interactive
+ Enable shell integration to improve command detection
+
+Excelente, la restauración funcionó correctamente. Ahora intenta ejecutar el comando de publicación nuevamente:
+
+
+dotnet publish -c Release -r win-x64 --self-contained true
+
+Resumen de lo que se hizo:
+Se instaló el proveedor de credenciales de Azure Artifacts
+Se autenticó con el feed privado de Azure DevOps mediante dotnet restore --interactive
+Se ejecutó la publicación exitosamente
+
+Los archivos publicados se encuentran en:
+C:\Users\030119\OneDrive - Soliss\Escritorio\DESARROLLO\DESARROLLO\MODELOS\CALCULOSTRANSFORMADOR\NetCoreAPIYFrontBlazor\Server\bin\Release\net8.0\win-x64\publish\
+
+
+
+
+
 
 
 PARA CONSULTAR BBDD SQLITE

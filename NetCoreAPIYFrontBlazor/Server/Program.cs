@@ -24,10 +24,18 @@ builder.Services.AddSwaggerGen();
 
 
 
-builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+//builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
+//{
+//    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+//}));
+
+builder.Services.AddCors(options =>
 {
-    builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
-}));
+    options.AddPolicy("AllowAll", policy =>
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+});
 
 var app = builder.Build();
 
@@ -57,7 +65,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
-app.UseCors("corsapp");
+app.UseCors("AllowAll");
 
 app.MapRazorPages();
 app.MapControllers();
