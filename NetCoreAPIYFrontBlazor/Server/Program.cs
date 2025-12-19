@@ -22,7 +22,13 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 
-
+//Añadido para publicar en Railway
+builder.WebHost.ConfigureKestrel(options =>
+{
+    options.ListenAnyIP(
+        int.Parse(Environment.GetEnvironmentVariable("PORT") ?? "5000")
+    );
+});
 
 //builder.Services.AddCors(p => p.AddPolicy("corsapp", builder =>
 //{
@@ -58,7 +64,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
 app.UseBlazorFrameworkFiles();
 app.UseStaticFiles();
