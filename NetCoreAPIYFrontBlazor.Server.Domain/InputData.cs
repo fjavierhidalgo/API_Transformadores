@@ -60,7 +60,7 @@ namespace NetCoreAPIYFrontBlazor.Server.Domain
         public string? NoiseKV { get; set; }
         public int? KRBT { get; set; }
         public int? KRAB { get; set; }
-
+        
 
         public Transformador? Transformador { get; set; }
 

@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NetCoreAPIYFrontBlazor.Server.Persistence;
 
@@ -10,12 +11,14 @@ using NetCoreAPIYFrontBlazor.Server.Persistence;
 namespace NetCoreAPIYFrontBlazor.Server.Persistence.Migrations
 {
     [DbContext(typeof(ServerContext))]
-    partial class ServerContextModelSnapshot : ModelSnapshot
+    [Migration("20260113135033_Modif_InputDataWire")]
+    partial class Modif_InputDataWire
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "10.0.3");
+            modelBuilder.HasAnnotation("ProductVersion", "8.0.0");
 
             modelBuilder.Entity("NetCoreAPIYFrontBlazor.Server.Domain.Auditoria", b =>
                 {
@@ -51,50 +54,6 @@ namespace NetCoreAPIYFrontBlazor.Server.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Auditoria");
-                });
-
-            modelBuilder.Entity("NetCoreAPIYFrontBlazor.Server.Domain.HiVoltage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<decimal?>("NudeCond")
-                        .HasColumnType("decimal(18,6)");
-
-                    b.Property<decimal?>("NudeCondGrossWire")
-                        .HasColumnType("decimal(18,6)");
-
-                    b.Property<int?>("ParallCondGrossWireMax")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ParallCondGrossWireMin")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ParallCondMax")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("ParallCondMin")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StripSizeMax")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("StripSizeMin")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TransformadorId")
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Wire")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TransformadorId");
-
-                    b.ToTable("HiVoltages");
                 });
 
             modelBuilder.Entity("NetCoreAPIYFrontBlazor.Server.Domain.InputData", b =>
@@ -244,6 +203,9 @@ namespace NetCoreAPIYFrontBlazor.Server.Persistence.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("varchar(50)");
 
+                    b.Property<string>("Wire")
+                        .HasColumnType("varchar(5)");
+
                     b.HasKey("Id");
 
                     b.HasIndex("TransformadorId")
@@ -274,16 +236,6 @@ namespace NetCoreAPIYFrontBlazor.Server.Persistence.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Transformadores");
-                });
-
-            modelBuilder.Entity("NetCoreAPIYFrontBlazor.Server.Domain.HiVoltage", b =>
-                {
-                    b.HasOne("NetCoreAPIYFrontBlazor.Server.Domain.Transformador", "Transformador")
-                        .WithMany()
-                        .HasForeignKey("TransformadorId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.Navigation("Transformador");
                 });
 
             modelBuilder.Entity("NetCoreAPIYFrontBlazor.Server.Domain.InputData", b =>

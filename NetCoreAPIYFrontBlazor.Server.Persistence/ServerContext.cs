@@ -23,6 +23,7 @@ public class ServerContext : DbContext, IServerContext
     public DbSet<Auditoria> Auditoria { get; set; }
     public DbSet<Transformador> Transformadores { get; set; }
     public DbSet<InputData> InputsData { get; set; }
+    public DbSet<HiVoltage> HiVoltages { get; set; }
 
 
     //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

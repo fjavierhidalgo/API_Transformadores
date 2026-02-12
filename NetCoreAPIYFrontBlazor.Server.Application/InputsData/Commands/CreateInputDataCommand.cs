@@ -55,5 +55,6 @@ public class CreateInputDataCommand : IRequest<int>
     public string? noiseKV { get; set; }
     public int? kRBT { get; set; }
     public int? kRAB { get; set; }
+    public string? wire { get; set; }    //Propiedad que se pueder repetir
 
 }

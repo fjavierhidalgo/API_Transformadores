@@ -42,8 +42,9 @@ namespace NetCoreAPIYFrontBlazor.Server.Persistence.Configuration
             builder.Property(n => n.NoiseKHi).HasColumnType($"varchar(1)");
             builder.Property(n => n.NoiseKSB).HasColumnType($"varchar(1)");
             builder.Property(n => n.NoiseKV).HasColumnType($"varchar(1)");
+            //builder.Property(n => n.Wire).HasColumnType($"varchar(5)");
 
-          
+
         }
     }
 

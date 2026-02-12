@@ -91,7 +91,8 @@ namespace STS.SiniestrosHogar.Application
                     noiseKSB = valorLectura.NoiseKSB,
                     noiseKV = valorLectura.NoiseKV,
                     kRBT = valorLectura.KRBT,
-                    kRAB= valorLectura.KRAB
+                    kRAB= valorLectura.KRAB,
+                    //wire = valorLectura.Wire
                 };
             }
                         

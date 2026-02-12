@@ -9,6 +9,7 @@ namespace NetCoreAPIYFrontBlazor.Server.Application.Interfaces
 	{        
         DbSet<Transformador> Transformadores { get; set; }
         DbSet<InputData> InputsData { get; set; }
+        DbSet<HiVoltage> HiVoltages { get; set; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
         Task<int> SaveChangesAndAuditAsync(string usuarioId, CancellationToken cancellationToken = default);

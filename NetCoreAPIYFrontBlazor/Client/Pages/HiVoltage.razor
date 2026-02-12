@@ -1,0 +1,116 @@
+@page "/hivoltage/{referencia}"
+@using NetCoreAPIYFrontBlazor.Client.Services
+@using NetCoreAPIYFrontBlazor.Shared
+@inject IHiVoltagesService _hiVoltagesService
+@inject NavigationManager Navigation
+
+<PageTitle>Hi Voltage</PageTitle>
+
+<h3>Hi Voltage</h3>
+
+@if (hiVoltage == null)
+{
+    <p><em>Cargando...</em></p>
+}
+else
+{
+    <EditForm Model="hiVoltage" OnValidSubmit="Guardar">
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+
+        <div class="row mb-3">
+            <div class="col-md-3">
+                <label for="id" class="form-label">Id</label>
+                <InputNumber id="id" class="form-control" @bind-Value="hiVoltage.id" Disabled="true" />
+            </div>
+            <div class="col-md-3">
+                <label for="transformadorId" class="form-label">Transformador Id</label>
+                <InputNumber id="transformadorId" class="form-control" @bind-Value="hiVoltage.transformadorId" Disabled="true" />
+            </div>
+            <div class="col-md-6">
+                <label for="wire" class="form-label">Wire</label>
+                <InputText id="wire" class="form-control" @bind-Value="hiVoltage.wire" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="stripSizeMin" class="form-label">Strip Size Min</label>
+                <InputNumber id="stripSizeMin" class="form-control" @bind-Value="hiVoltage.stripSizeMin" />
+            </div>
+            <div class="col-md-6">
+                <label for="stripSizeMax" class="form-label">Strip Size Max</label>
+                <InputNumber id="stripSizeMax" class="form-control" @bind-Value="hiVoltage.stripSizeMax" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="parallCondGrossWireMin" class="form-label">Parallel Cond Gross Wire Min</label>
+                <InputNumber id="parallCondGrossWireMin" class="form-control" @bind-Value="hiVoltage.parallCondGrossWireMin" />
+            </div>
+            <div class="col-md-6">
+                <label for="parallCondGrossWireMax" class="form-label">Parallel Cond Gross Wire Max</label>
+                <InputNumber id="parallCondGrossWireMax" class="form-control" @bind-Value="hiVoltage.parallCondGrossWireMax" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="nudeCondGrossWire" class="form-label">Nude Cond Gross Wire</label>
+                <InputNumber id="nudeCondGrossWire" class="form-control" @bind-Value="hiVoltage.nudeCondGrossWire" />
+            </div>
+            <div class="col-md-6">
+                <label for="nudeCond" class="form-label">Nude Cond</label>
+                <InputNumber id="nudeCond" class="form-control" @bind-Value="hiVoltage.nudeCond" />
+            </div>
+        </div>
+
+        <div class="row mb-3">
+            <div class="col-md-6">
+                <label for="parallCondMin" class="form-label">Parallel Cond Min</label>
+                <InputNumber id="parallCondMin" class="form-control" @bind-Value="hiVoltage.parallCondMin" />
+            </div>
+            <div class="col-md-6">
+                <label for="parallCondMax" class="form-label">Parallel Cond Max</label>
+                <InputNumber id="parallCondMax" class="form-control" @bind-Value="hiVoltage.parallCondMax" />
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-success">Guardar</button>
+        <button type="button" class="btn btn-secondary" @onclick="Volver">Volver</button>
+    </EditForm>
+}
+
+@code {
+    [Parameter]
+    public string? referencia { get; set; }
+
+    private HiVoltageDto? hiVoltage;
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (!string.IsNullOrEmpty(referencia) && referencia != "0")
+        {
+            hiVoltage = await _hiVoltagesService.GetHiVoltagePorReferencia(referencia);
+        }
+        else
+        {
+            hiVoltage = new();
+        }
+    }
+
+    private async Task Guardar()
+    {
+        if (hiVoltage != null)
+        {
+            await _hiVoltagesService.ActualizarHiVoltage(hiVoltage);
+            Navigation.NavigateTo("/listatransformadores");
+        }
+    }
+
+    private void Volver()
+    {
+        Navigation.NavigateTo("/listatransformadores");
+    }
+}

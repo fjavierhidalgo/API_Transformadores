@@ -129,6 +129,7 @@ public class CreateInputDataCommandHandler : IRequestHandler<CreateInputDataComm
             valorLectura.NoiseKV = request.noiseKV ?? "";
             valorLectura.KRBT = request.kRBT;
             valorLectura.KRAB = request.kRAB;
+            //valorLectura.Wire = request.wire ?? "";
         }
 
         var res = await _serverContext.SaveChangesAndAuditAsync(_sessionService.UsuarioId);
